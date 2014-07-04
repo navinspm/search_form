@@ -1,28 +1,23 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+add gem 'ransack'
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+in your controller
+	def index
+   			@search=Post.search(params[:q])
+   			@posts = @search.result
+   	end
+
+
+
+   	in your view file
+
+   		<%= search_form_for @search do |f| %>
+			<div class="field">
+  			<%= f.label :name_cont, "name contains" %><br>
+  			<%= f.text_field :name_cont, 'data-behaviour' => 'datepicker'%>
+			</div>
+		<div class="actions"><%= f.submit "search" %></div>
+			<% end %>
+
+
+			the name_cont constraint can be any param in which you search by
