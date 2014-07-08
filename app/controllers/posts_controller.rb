@@ -3,17 +3,26 @@ class PostsController < ApplicationController
 
   # GET /posts
   # GET /posts.json
-  def index
-   @search=Post.search(params[:q])
-  @posts = @search.result
-    #@posts=Post.where("created_at >= ?", Date.today).order("votes_count DESC, created_at DESC")
+  def index   
+     if params[:q]
+        @search=Post.search(params[:q])
+        @posts = @search.result
+    else
+          @posts=Post.where(date: Date.today.strftime("%Y-%m-%d")) 
+    end
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+
   end
 
+  before_filter :set_search
+
+def set_search
+  @search=Post.search(params[:q])
+end
   # GET /posts/new
   def new
     @post = Post.new
@@ -22,6 +31,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
   end
+
 
   # POST /posts
   # POST /posts.json

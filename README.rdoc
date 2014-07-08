@@ -2,15 +2,17 @@ add gem 'ransack'
 
 
 in your controller
+````
 	def index
    			@search=Post.search(params[:q])
    			@posts = @search.result
    	end
+    ````
 
 
 
    	in your view file
-
+````
    		<%= search_form_for @search do |f| %>
 			<div class="field">
   			<%= f.label :name_cont, "name contains" %><br>
@@ -19,5 +21,30 @@ in your controller
 		<div class="actions"><%= f.submit "search" %></div>
 			<% end %>
 
-
+````
 			the name_cont constraint can be any param in which you search by
+
+downlaod gldatepicker and add all the javascript files to application.js
+in field which you want date picker just add the :id => search_box are anything you like and change below code
+
+````
+$('#search_box').glDatePicker(
+      {
+          showAlways: true,
+          allowMonthSelect: true,
+          allowYearSelect: true,
+          prevArrow: '\u25c4',
+          nextArrow: '\u25ba',
+           onClick: function(target, cell, date, data) {
+                     target.val(date.getFullYear() +'-'+
+                      (date.getMonth()+1) +'-'+
+                      date.getDate());
+                      if(data != null) {
+                      alert(data.message + '\n' + date) 
+                    }+  $('#search_form').submit();     
+                 }
+           //  cssName: 'flatwhite'
+          //cssName: 'darkneon'
+       });
+
+       ````

@@ -12,5 +12,7 @@
  *
  *= require_tree .
  *= require_self
-  *= require bootstrap-datepicker
+ *= require_glDatePicker.darkneon
+ *= require_glDatePicker.default
+ *= require_glDatePicker.flatwhite
  */
